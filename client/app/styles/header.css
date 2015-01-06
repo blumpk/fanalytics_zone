@@ -1,0 +1,41 @@
+.header_section {
+    background-image: url("/images/american_football2.jpg");
+    background-size: 100% auto;
+    /* Set rules to fill background */
+    height: 25%;
+    width: 100%;
+    padding: 0px;
+
+}
+.header_section h1 {
+    padding-top: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    float: left;
+    width: 75%;
+    color: white;
+    text-shadow: 4px 4px black;
+    text-align: center;
+}
+.main_section {
+    background-color: lightcoral;
+    height: 25%;
+    text-align: center;
+}
+
+body, html, .main {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+.header_section button {
+  margin-top: 25px;
+  float: right;
+  width: 12.5%;
+
+}
