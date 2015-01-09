@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4496bfc4-a8f8-4e66-8b9a-73d64b0c6587" name="Default" comment="Updated Fantasy App Files">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/styles/header.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/views/home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/scripts/controllers/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/scripts/app.js" afterPath="$PROJECT_DIR$/client/app/scripts/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/index.html" afterPath="$PROJECT_DIR$/client/app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="4496bfc4-a8f8-4e66-8b9a-73d64b0c6587" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fantasy_app.iws" />
@@ -284,6 +278,13 @@
       <option name="number" value="Default" />
       <updated>1419429554506</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updated Fantasy App Files">
+      <created>1420517811970</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1420517811970</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
