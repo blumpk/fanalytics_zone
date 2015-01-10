@@ -46,7 +46,7 @@ p {
 }
 
 a {
-  color: #219ab3;
+  color: #ccc;
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
@@ -138,7 +138,7 @@ a:focus {
   height: auto;
   padding-top: 100px;
   text-align: center;
-  color: #fff;
+  color: #ccc;
   background: url(../images/american_football2.jpg) no-repeat bottom center scroll;
   background-color: #000;
   -webkit-background-size: cover;
@@ -259,7 +259,7 @@ a:focus {
   height: auto;
   padding: 100px 0;
   text-align: center;
-  color: #fff;
+  color: #ccc;
   #color: #556B2F;
   background: url(../images/football_player2.jpg) no-repeat bottom center scroll;
   -webkit-background-size: cover;
@@ -285,7 +285,7 @@ a:focus {
   height: auto;
   padding: 100px 0;
   text-align: center;
-  color: #fff;
+  color: #cccccc;
   #color: #556B2F;
   background: url(../images/sec_football.jpg) no-repeat bottom center scroll;
   -webkit-background-size: cover;
@@ -337,17 +337,17 @@ a:focus {
 }
 
 .btn-default {
-  border: 1px solid #219ab3;
-  color: #219ab3;
-  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #333;
+  background-color: #fff;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-  border: 1px solid #219ab3;
+  border: 1px solid #ccc;
   outline: 0;
-  color: #000;
-  background-color: #219ab3;
+  color: #333;
+  background-color: #fff;
 }
 
 ul.banner-social-buttons {
