@@ -19,6 +19,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.set('views', '../client/app');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.use('/', routes);
 
 /**
  * Development Settings
@@ -29,7 +33,7 @@ if (app.get('env') === 'development') {
     // This covers serving up the index page
     app.use(express.static(path.join(__dirname, '../client/.tmp')));
     app.use(express.static(path.join(__dirname, '../client/app')));
-
+/*
     // Error Handling
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -38,6 +42,7 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+    */
 }
 
 /**

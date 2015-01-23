@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('HomeCtrl', function($scope, $location, Auth) {
+app.controller('HomeCtrl', function($scope, $location) {
+/*
     if (Auth.signedIn()) {
         $location.path('/');
     }
@@ -25,4 +26,5 @@ app.controller('HomeCtrl', function($scope, $location, Auth) {
             $scope.error = error.toString();
         });
     };
+    */
 });
