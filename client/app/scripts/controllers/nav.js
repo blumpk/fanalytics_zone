@@ -2,7 +2,7 @@
 
 app.controller('NavCtrl', function ($scope, $location) {
 
-  $scope.signedIn = function() { return true; };
+  $scope.signedIn = function() { return false; };
 
   /*
   $scope.post = {url: 'http://', title: ''};
