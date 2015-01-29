@@ -1,28 +1,10 @@
 'use strict';
 
-app.controller('RegisterCtrl', function($scope, $location, Auth) {
-  if (Auth.signedIn()) {
-    $location.path('/');
-  }
-
-  $scope.login = function() {
-    Auth.login($scope.user).then(function () {
-      $location.path('/');
-    }, function(error) {
-      $scope.error = error.toString();
-    });
-  };
-
-  $scope.register = function () {
-    Auth.register($scope.user).then(function(user) {
-      return Auth.login($scope.user).then(function() {
-        user.username = $scope.user.username;
-        return Auth.createProfile(user);
-      }).then(function() {
-        $location.path('/');
+app.controller('RegisterCtrl', ['$scope', 'Auth', function($scope, Auth) {
+    $scope.register = function() {
+      Auth.register({
+        email: $scope.email,
+        password: $scope.password
       });
-    }, function(error) {
-      $scope.error = error.toString();
-    });
-  };
-});
+    };
+  }]);

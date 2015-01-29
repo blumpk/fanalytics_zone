@@ -14,20 +14,22 @@ var app = express();
 mongoose.connect(dbConfig.url);
 
 var passport = require('passport');
-var expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
+var LocalStrategy = require('passport-local');
 
-passport.serializeUser(function(user, done) {
-    done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, user);
+        });
+    }
+));
 
 // view engine setup
 
@@ -42,6 +44,26 @@ app.set('views', '../client/app');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use('/', routes);
+//app.get('/', routes.index);
+//app.get('/users', auth, user.list);
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+var auth = function(req, res, next){
+    if (!req.isAuthenticated())
+        res.send(401);
+    else
+        next();
+};
 
 /**
  * Development Settings

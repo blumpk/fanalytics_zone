@@ -1,52 +1,32 @@
-'use strict';
+app.factory('Auth', ['$http', '$location', '$rootScope', '$cookieStore',
+    function($http, $location, $rootScope, $cookieStore) {
+      $rootScope.currentUser = $cookieStore.get('user');
+      $cookieStore.remove('user');
 
-app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $firebase) {
-  var ref = new Firebase(FIREBASE_URL);
-  var auth = $firebaseSimpleLogin(ref);
+      return {
+        login: function(user) {
+          return $http.post('/login', user)
+            .success(function(data) {
+              $rootScope.currentUser = data;
+              $location.path('/');
 
-  var Auth = {
-    register: function(user) {
-      return auth.$createUser(user.email, user.password);
-    },
-    createProfile: function (user) {
-      var profile = {
-        username: user.username,
-        md5_hash: user.md5_hash
+            })
+            .error(function() {
+            });
+        },
+        register: function(user) {
+          return $http.post('/register', user)
+            .success(function() {
+              $location.path('/');
+            })
+            .error(function(response) {
+            });
+        },
+        logout: function() {
+          return $http.get('/api/logout').success(function() {
+            $rootScope.currentUser = null;
+            $cookieStore.remove('user');
+          });
+        }
       };
-
-      var profileRef = $firebase(ref.child('profile'));
-      return profileRef.$set(user.uid, profile);
-    },
-    login: function(user) {
-      return auth.$login('password', user);
-    },
-    logout: function() {
-      auth.$logout();
-    },
-    resolveUser: function() {
-      return auth.$getCurrentUser();
-    },
-    signedIn: function() {
-      return !!Auth.user.provider;
-    },
-    user: {}
-  };
-
-  $rootScope.$on('firebaseSimpleLogin:login', function(e, user) {
-    angular.copy(user, Auth.user);
-    Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
-
-    console.log(Auth.user);
-  });
-
-  $rootScope.$on('firebaseSimpleLogin:logout', function() {
-    console.log('logged out');
-
-    if(Auth.user && Auth.user.profile) {
-      Auth.user.profile.$destroy();
-    }
-    angular.copy({}. Auth.user);
-  });
-
-  return Auth;
-});
+    }]);
