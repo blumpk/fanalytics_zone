@@ -1,6 +1,16 @@
 'use strict';
 
-app.controller('FantasyCtrl', function($scope, $location) {
+app.controller('FantasyCtrl', function($scope, $http) {
+
+  $scope.showList = function() {
+    $http.get('/teams').
+      success(function(data, status, headers, config) {
+        $scope.teams = data;
+      }).
+      error(function(data, status, headers, config) {
+        // log error
+      });
+  };
 /*
     if (Auth.signedIn()) {
         $location.path('/');

@@ -2,5 +2,5 @@
  * Created by brian on 1/25/15.
  */
 module.exports = {
-    'url': 'mongodb://localhost/passport'
+    'url': 'mongodb://localhost/nba'
 }

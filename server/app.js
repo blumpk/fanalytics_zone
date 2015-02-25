@@ -6,30 +6,38 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var dbConfig = require('./db.js');
-var routes = require('./routes/index');
-var users = require('./routes/users');
+
 
 var app = express();
 
 mongoose.connect(dbConfig.url);
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
+mongoose.connection.on('open', function (ref) {
+    console.log('Connected to mongo server.');
+    //trying to get collection names
+    mongoose.connection.db.collectionNames(function (err, names) {
+        console.log(names); // [{ name: 'dbname.myCollection' }]
+        module.exports.Collection = names;
+    });
+})
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    }
-));
+var passport = require('passport');
+var expressSession = require('express-session');
+
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+var routes = require('./routes/index')(passport);
+var users = require('./routes/users');
 
 // view engine setup
 
@@ -47,23 +55,6 @@ app.use('/', routes);
 //app.get('/', routes.index);
 //app.get('/users', auth, user.list);
 
-
-passport.serializeUser(function(user, done) {
-    done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
-
-var auth = function(req, res, next){
-    if (!req.isAuthenticated())
-        res.send(401);
-    else
-        next();
-};
 
 /**
  * Development Settings
@@ -104,6 +95,5 @@ if (app.get('env') === 'production') {
         });
     });
 }
-
 
 module.exports = app;

@@ -1,6 +1,11 @@
 <div>
 
-  <h2>Welcome</h2>
-  <p>Welcome to the Fantasy Page</p>
+  <h2>Fxantasy Rec Center</h2>
+  <label style="float: center">Select Players to be Evaluated </label> <button type="button" class="btn btn-primary" ng-click="showList()">Add</button>
+  <h2>
+    <ul ng-repeat="team in teams">
+      <li>{{team.full_name}}</li>
+    </ul>
+  </h2>
 </div>
 

@@ -18,6 +18,9 @@
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.0.0",
+    "bcrypt-nodejs" : "*",
+    "nodemon": "~1.0.14",
+    "connect-flash" : "*",
     "serve-favicon": "~2.1.3"
   }
 }

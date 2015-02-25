@@ -2,9 +2,10 @@
 
 app.controller('RegisterCtrl', ['$scope', 'Auth', function($scope, Auth) {
     $scope.register = function() {
+      console.log($scope.user);
       Auth.register({
-        email: $scope.email,
-        password: $scope.password
+        email: $scope.user.email,
+        password: $scope.user.password
       });
     };
   }]);

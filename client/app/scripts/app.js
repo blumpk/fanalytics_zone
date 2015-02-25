@@ -17,30 +17,8 @@ var app = angular
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function($routeProvider, $locationProvider, $httpProvider) {
-    //================================================
-    // Check if the user is connected
-    //================================================
-    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
-      // Initialize a new promise
-      var deferred = $q.defer();
+  .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
-      // Make an AJAX call to check if the user is logged in
-      $http.get('/loggedin').success(function(user){
-        // Authenticated
-        if (user !== '0')
-          $timeout(deferred.resolve, 0);
-
-        // Not Authenticated
-        else {
-          $rootScope.message = 'You need to log in.';
-          $timeout(function(){deferred.reject();}, 0);
-          $location.url('/login');
-        }
-      });
-
-      return deferred.promise;
-    };
     //================================================
 
     //================================================
@@ -84,9 +62,16 @@ var app = angular
       })
       .otherwise({
         redirectTo: 'views/home.html'
-      });
-  })
+      })
 
-  .run(function ($rootScope, $location, Auth) {
-
+  }])
+  .run(function ($rootScope) {
+/*
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+      if (!Auth.authorize(next.access)) {
+        if(Auth.isLoggedIn()) $location.path('/');
+        else                  $location.path('/login');
+      }
+    });
+*/
   });
