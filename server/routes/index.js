@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Teams = require('../models/teams');
-
+var Players = require('../models/players');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -65,6 +65,12 @@ module.exports = function(passport) {
 
     router.get('/teams', function(req, res) {
         Teams.find({}, function(err, data) {
+            res.send(data);
+        });
+    });
+
+    router.get('/players', function(req, res) {
+        Players.find({}, function(err, data) {
             res.send(data);
         });
     });

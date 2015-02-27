@@ -2,7 +2,7 @@
 
 app.controller('FantasyCtrl', function($scope, $http) {
 
-  $http.get('/teams').
+  $http.get('/players').
     success(function(data, status, headers, config) {
       $scope.teams = data;
     }).
@@ -11,7 +11,7 @@ app.controller('FantasyCtrl', function($scope, $http) {
     });
 
   $scope.showList = function() {
-    $http.get('/teams').
+    $http.get('/players').
       success(function(data, status, headers, config) {
         $scope.teams = data;
       }).
