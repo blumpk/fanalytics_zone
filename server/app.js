@@ -12,15 +12,6 @@ var app = express();
 
 mongoose.connect(dbConfig.url);
 
-mongoose.connection.on('open', function (ref) {
-    console.log('Connected to mongo server.');
-    //trying to get collection names
-    mongoose.connection.db.collectionNames(function (err, names) {
-        console.log(names); // [{ name: 'dbname.myCollection' }]
-        module.exports.Collection = names;
-    });
-})
-
 var passport = require('passport');
 var expressSession = require('express-session');
 

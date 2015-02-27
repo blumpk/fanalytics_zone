@@ -2,6 +2,14 @@
 
 app.controller('FantasyCtrl', function($scope, $http) {
 
+  $http.get('/teams').
+    success(function(data, status, headers, config) {
+      $scope.teams = data;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
+
   $scope.showList = function() {
     $http.get('/teams').
       success(function(data, status, headers, config) {
