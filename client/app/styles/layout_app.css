@@ -1,0 +1,30 @@
+body {
+  background-color: #568B56;
+  font-family: Sans-Serif;
+}
+.navbar-default {
+  background: #215C21;
+}
+.navbar-default .navbar-brand {
+  color: #FBE4D4;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #FBE4D4;
+}
+
+.toptabs {
+  background: #AAC9AA;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs > li > a {
+  border-radius: 5px;
+  color: #60223F;
+  border-color: #60223F;
+  font-weight: bold;
+  border-style: solid;
+  border-bottom: none;
+}
