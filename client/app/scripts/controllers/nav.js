@@ -1,8 +1,9 @@
 'use strict';
 
-app.controller('NavCtrl', function ($scope, $location) {
+app.controller('NavCtrl', function ($scope, $location, $rootScope) {
 
-  $scope.signedIn = function() { return false; };
+  $scope.signedIn = $rootScope.authenticated;
+  console.log($scope.signedIn);
 
   /*
   $scope.post = {url: 'http://', title: ''};

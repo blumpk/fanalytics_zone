@@ -31,10 +31,11 @@ var app = angular
       // Make an AJAX call to check if the user is logged in
       $http.get('/loggedin').success(function(user){
         // Authenticated
-        if (user !== '0')
-        /*$timeout(deferred.resolve, 0);*/
+        if (user !== '0') {
+          $rootScope.message = 'You need to log in.';
+          /*$timeout(deferred.resolve, 0);*/
           deferred.resolve();
-
+        }
         // Not Authenticated
         else {
           $rootScope.message = 'You need to log in.';

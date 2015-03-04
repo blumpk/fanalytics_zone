@@ -11,12 +11,14 @@ var isAuthenticated = function (req, res, next) {
         return next();
     }
     // if the user is not authenticated then redirect him to the login page
-    res.redirect('/');
+    res.status(401).send('home.html', {title: 'Express'});
+    //res.send(401);
+    //res.render('home.html', {title: 'Express'});
 };
 
 module.exports = function(passport) {
     /* GET home page. */
-    router.get('/' , function (req, res) {
+    router.get('/', function (req, res) {
         res.render('home.html', {title: 'Express'});
     });
 
@@ -44,7 +46,7 @@ module.exports = function(passport) {
 
      // route to log in
      router.post('/login', function(req, res) {
-     res.redirect('/');
+         res.send(req.user);
      });
 
     /* Handle Login POST */
@@ -60,7 +62,7 @@ module.exports = function(passport) {
     /* Handle Logout */
     router.get('/logout', function(req, res) {
         req.logout();
-        res.redirect('/');
+        res.send(200);
     });
 
     router.get('/teams', function(req, res) {

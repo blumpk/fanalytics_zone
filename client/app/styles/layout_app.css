@@ -2,6 +2,39 @@ body {
   background-color: #568B56;
   font-family: Sans-Serif;
 }
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.container {
+  padding-right: 0; /*15px in bootstrap.css*/
+  padding-left: 0;  /*idem*/
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbar-brand
+{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.nav-tabs.nav-justified > li > a {
+  border-color: #60223F;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background-color: #568B56;
+  color: #60223F;
+  border-color: #60223F;
+  font-weight: bold;
+  border-style: solid;
+}
+
 .navbar-default {
   background: #215C21;
 }
@@ -13,18 +46,18 @@ body {
 }
 
 .toptabs {
-  background: #AAC9AA;
+
 }
 
 .nav-tabs {
-  border-bottom: none;
+  background: #AAC9AA;
 }
 
 .nav-tabs > li > a {
+  margin-right: 0px;
   border-radius: 5px;
   color: #60223F;
   border-color: #60223F;
   font-weight: bold;
   border-style: solid;
-  border-bottom: none;
 }

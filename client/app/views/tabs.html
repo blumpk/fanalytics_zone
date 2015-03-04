@@ -1,6 +1,8 @@
 <div ng-controller="TabsCtrl">
 
-  <ul class="nav nav-tabs">
+  <div class="container">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
     <li role="presentation" ng-class="{ active: isActive('/fantasy')}"><a href="#/fantasy">Fantasy Recs</a></li>
     <li role="presentation" ng-class="{ active: isActive('/models')}"><a href="#/models">Models</a></li>
     <li role="presentation" ng-class="{ active: isActive('/smack')}"><a href="#/smack">Smack Room</a></li>
@@ -8,5 +10,5 @@
     <li role="presentation" ng-class="{ active: isActive('/articles')}"><a href="#/articles">Articles</a></li>
     <li role="presentation" ng-class="{ active: isActive('/profile')}"><a href="#/profile">My Profile</a></li>
   </ul>
-
+    </div>
 </div>
