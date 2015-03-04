@@ -1,21 +1,53 @@
-<div>
-<h2>Fantasy Rec Center</h2>
-  <label style="float: center">Select Players to be Evaluated </label>
-  <button type="button" class="btn btn-primary" ng-click="showList()">Add</button>
-<div class="row">
-  <div class="col-lg-6">
-  <div class="input-group">
-    <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-default">Team</button>
-      <button type="button" class="btn btn-default">Player</button>
+<div style="text-align: center">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <h2>Fantasy Rec Center</h2>
+        <label style="float: center">Select Players to for Your Team </label>
+      </div>
+      <div class="col-lg-4">
+        <h2> My Team </h2>
+      </div>
     </div>
-        <button class="btn btn-default" type="button">ADD</button>
-      </span>
-    <input type="text" class="form-control" placeholder="Team" ng-model="searchText">
-  </div><!-- /input-group -->
-</div><!-- /.col-lg-6 -->
-</div>
-    <ul ng-repeat="team in teams | filter:searchText" class="list-group" >
-      <li class="list-group-item">{{team.display_name}}</li>
-    </ul>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href="#">My Team</a></li>
+          <li><a href="#">Requests</a></li>
+          <li><a href="#">Give Advice</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <div class="input-group">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" ng-click="chooseTeam()">Team</button>
+            <button type="button" class="btn btn-default" ng-click="choosePlayers()">Player</button>
+          </div>
+          <button class="btn btn btn-primary" type="button">ADD</button>
+          </span>
+          <input type="text" class="form-control" placeholder="Team" ng-model="searchText">
+        </div>
+        <!-- /input-group -->
+        <!-- /.col-lg-6 -->
+        <ul ng-repeat="team in teams | filter:searchText | limitTo:10" class="list-group" ng-show="showPlayer">
+          <li class="list-group-item"><span class="glyphicon-plus" style="vertical-align:right"></span>
+            {{team.display_name}}
+          </li>
+        </ul>
+        <ul ng-repeat="team in teams | filter:searchText | limitTo:10" class="list-group" ng-show="showTeam">
+          <li class="list-group-item"><span class="glyphicon-plus" style="vertical-align:right"></span>
+            {{team.full_name}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <ul ng-repeat="player in myTeam" class="list-group">
+          <li class="list-group-item">{{player.display_name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

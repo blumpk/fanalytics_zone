@@ -2,18 +2,38 @@
 
 app.controller('FantasyCtrl', function($scope, $http) {
 
-  $http.get('/players').
-    success(function(data, status, headers, config) {
-      $scope.teams = data;
-    }).
-    error(function(data, status, headers, config) {
-      // log error
-    });
+
+  $scope.showTeam = false;
+  $scope.showPlayer = false;
 
   $scope.showList = function() {
     $http.get('/players').
       success(function(data, status, headers, config) {
         $scope.teams = data;
+      }).
+      error(function(data, status, headers, config) {
+        // log error
+      });
+  };
+
+  $scope.chooseTeam = function() {
+    $http.get('/teams').
+      success(function(data, status, headers, config) {
+        $scope.teams = data;
+        $scope.showTeam = true;
+        $scope.showPlayer = false;
+      }).
+      error(function(data, status, headers, config) {
+        // log error
+      });
+  };
+
+  $scope.choosePlayers = function() {
+    $http.get('/players').
+      success(function(data, status, headers, config) {
+        $scope.teams = data;
+        $scope.showPlayer = true;
+        $scope.showTeam = false;
       }).
       error(function(data, status, headers, config) {
         // log error
