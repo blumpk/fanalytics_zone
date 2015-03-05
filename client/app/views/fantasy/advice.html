@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <ul class="nav nav-tabs nav-stacked">
+        <li><a href="#/fantasy">My Team</a></li>
+        <li><a href="#/fantasy/requests">Requests</a></li>
+        <li><a href="#/fantasy/advice">Give Advice</a></li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <h3>Show off Your Skills. Predict Who is Better</h3>
+      <li ng-repeat="player in list[num]" class="list-group-item" ng-click="update(player)">
+        {{player}}
+      </li>
+    </div>
+  </div>
+</div>

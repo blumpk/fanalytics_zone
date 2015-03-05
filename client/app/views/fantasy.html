@@ -1,5 +1,4 @@
 <div>
-
   <div class="container">
 
     <div class="row">
@@ -15,9 +14,9 @@
     <div class="row">
       <div class="col-lg-4">
         <ul class="nav nav-tabs nav-stacked">
-          <li><a href="#">My Team</a></li>
-          <li><a href="#">Requests</a></li>
-          <li><a href="#">Give Advice</a></li>
+          <li><a href="#/fantasy">My Team</a></li>
+          <li><a href="#/fantasy/requests">Requests</a></li>
+          <li><a href="#/fantasy/advice">Give Advice</a></li>
         </ul>
       </div>
       <div class="col-lg-4">
@@ -30,19 +29,19 @@
           </span>
           <input type="text" class="form-control" placeholder="Team" ng-model="searchText">
         </div>
-        <!-- /input-group -->
-        <!-- /.col-lg-6 -->
-        <ul ng-repeat="team in teams | filter:searchText | limitTo:10" class="list-group" ng-show="showPlayer">
-          <button type="button" class="btn btn-default">+</button><button class="btn btn-default">{{team.display_name}} </button>
-        </ul>
-        <ul ng-repeat="team in teams | filter:searchText | limitTo:10" class="list-group" ng-show="showTeam">
-            <button type="button" class="btn btn-default">+</button><button class="btn btn-default">{{team.full_name}} </button>
-        </ul>
+        <div class="panel panel-primary">
+          <div class="panel-heading">Please Select Players to Add to Team</div>
+          <li ng-repeat="player in teams | filter:searchText | limitTo:10" ng-show="showPlayer" class="list-group-item"
+              ng-click="addPlayer(player)">
+            {{player.display_name}}
+          </li>
+          <li ng-repeat="team in teams | filter:searchText | limitTo:10" ng-show="showTeam" class="list-group-item">
+            {{team.full_name}}
+          </li>
+        </div>
       </div>
       <div class="col-lg-4">
-        <ul ng-repeat="player in myTeam" class="list-group">
-          <li class="list-group-item">{{player.display_name}}</li>
-        </ul>
+        <li ng-repeat="player in myTeam" class="list-group-item">{{player.display_name}}</li>
       </div>
     </div>
   </div>

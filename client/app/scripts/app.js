@@ -92,6 +92,14 @@ var app = angular
         templateUrl: 'views/fantasy.html',
         controller: 'FantasyCtrl'
       })
+      .when('/fantasy/requests', {
+        templateUrl: 'views/fantasy/requests.html',
+        controller: 'RequestsCtrl'
+      })
+      .when('/fantasy/advice', {
+        templateUrl: 'views/fantasy/advice.html',
+        controller: 'AdviceCtrl'
+      })
       .when('/models', {
         templateUrl: 'views/models.html',
         controller: 'ModelsCtrl'

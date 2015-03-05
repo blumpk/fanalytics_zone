@@ -5,6 +5,7 @@ app.controller('FantasyCtrl', function($scope, $http) {
 
   $scope.showTeam = false;
   $scope.showPlayer = false;
+  $scope.myTeam = [];
 
   $scope.showList = function() {
     $http.get('/players').
@@ -38,6 +39,10 @@ app.controller('FantasyCtrl', function($scope, $http) {
       error(function(data, status, headers, config) {
         // log error
       });
+  };
+
+  $scope.addPlayer = function(player) {
+    $scope.myTeam.push(player);
   };
 /*
     if (Auth.signedIn()) {
