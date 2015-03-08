@@ -3,6 +3,9 @@
 app.controller('LoginCtrl', function($scope, $location, Auth) {
 
   $scope.login = function() {
-    Auth.login({ email: $scope.email, password: $scope.password });
+    Auth.login({
+      email: $scope.user.email,
+      password: $scope.user.password
+    });
   };
 });

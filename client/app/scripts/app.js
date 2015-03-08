@@ -30,16 +30,11 @@ var app = angular
       $http.get('/loggedin').success(function(user){
         // Authenticated
         if (user !== '0') {
-          $scope.$apply(function() {
-            $rootScope.authenticated = true;
-          });
-          console.log($rootScope.authenticated)
           /*$timeout(deferred.resolve, 0);*/
           deferred.resolve();
         }
         // Not Authenticated
         else {
-          $rootScope.authenticated = false;
           $rootScope.message = 'You need to log in.';
           //$timeout(function(){deferred.reject();}, 0);
           deferred.reject();
@@ -90,35 +85,43 @@ var app = angular
       })
       .when('/fantasy', {
         templateUrl: 'views/fantasy.html',
-        controller: 'FantasyCtrl'
+        controller: 'FantasyCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/fantasy/requests', {
         templateUrl: 'views/fantasy/requests.html',
-        controller: 'RequestsCtrl'
+        controller: 'RequestsCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/fantasy/advice', {
         templateUrl: 'views/fantasy/advice.html',
-        controller: 'AdviceCtrl'
+        controller: 'AdviceCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/models', {
         templateUrl: 'views/models.html',
-        controller: 'ModelsCtrl'
+        controller: 'ModelsCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/smack', {
         templateUrl: 'views/smack.html',
-        controller: 'SmackCtrl'
+        controller: 'SmackCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/prediction', {
         templateUrl: 'views/prediction.html',
-        controller: 'PredictionCtrl'
+        controller: 'PredictionCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/profile', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .when('/articles', {
         templateUrl: 'views/articles.html',
-        controller: 'ArticlesCtrl'
+        controller: 'ArticlesCtrl',
+        resolve: { loggedin: checkLoggedin }
       })
       .otherwise({
         redirectTo: 'views/home.html'

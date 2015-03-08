@@ -28,7 +28,6 @@ module.exports = function(passport) {
 
 // route to test if the user is logged in or not
     router.get('/loggedin', function (req, res) {
-        console.log(req.isAuthenticated());
         res.send(req.isAuthenticated() ? req.user : '0');
     });
 
@@ -45,9 +44,11 @@ module.exports = function(passport) {
     */
 
      // route to log in
-     router.post('/login', function(req, res) {
-         res.send(req.user);
-     });
+     router.post('/login', passport.authenticate('login', {
+         successRedirect: '/home',
+             failureRedirect: '/login',
+             failureFlash : true
+     }));
 
     /* Handle Login POST */
     /* Handle Registration POST */
@@ -62,7 +63,7 @@ module.exports = function(passport) {
     /* Handle Logout */
     router.get('/logout', function(req, res) {
         req.logout();
-        res.send(200);
+        res.redirect('/');
     });
 
     router.get('/teams', function(req, res) {

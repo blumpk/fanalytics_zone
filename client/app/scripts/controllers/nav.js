@@ -1,9 +1,27 @@
 'use strict';
 
-app.controller('NavCtrl', function ($scope, $location, $rootScope) {
+app.controller('NavCtrl', ['$scope', '$q', '$http','Auth', function ($scope, $q, $http,  Auth) {
 
-  $scope.signedIn = $rootScope.authenticated;
-  console.log($scope.signedIn);
+  $scope.signedIn = false;
+  //$scope.signedIn = Auth.isloggedin();
+  var deferred = $q.defer();
+
+  // Make an AJAX call to check if the user is logged in
+  $http.get('/loggedin').success(function(user){
+
+    // Authenticated
+    if (user !== '0') {
+      $scope.signedIn = true;
+      console.log(user);
+    }
+    // Not Authenticated
+    else {
+      $scope.signedIn = false;
+    }
+    console.log($scope.signedIn);
+  });
+
+  $scope.logout = Auth.logout();
 
   /*
   $scope.post = {url: 'http://', title: ''};
@@ -20,4 +38,4 @@ app.controller('NavCtrl', function ($scope, $location, $rootScope) {
     });
   };
   */
-});
+}]);
