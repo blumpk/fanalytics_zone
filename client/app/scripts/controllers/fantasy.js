@@ -43,6 +43,23 @@ app.controller('FantasyCtrl', function($scope, $http) {
 
   $scope.addPlayer = function(player) {
     $scope.myTeam.push(player);
+    $http.post('/profile/myTeam', player)
+      .success(function(data, status, headers, config) {
+        console.log("YAY");
+      })
+      .error(function(data, status, headers, config) {
+        console.log("ERROR");
+      });
+  };
+
+  $scope.saveTeam = function() {
+    $http.post('/profile/myTeam', {"players" : $scope.myTeam})
+      .success(function(data, status, headers, config) {
+      console.log("YAY");
+    })
+      .error(function(data, status, headers, config) {
+      console.log("ERROR");
+    });
   };
 /*
     if (Auth.signedIn()) {
