@@ -7,6 +7,14 @@ app.controller('FantasyCtrl', function($scope, $http) {
   $scope.showPlayer = false;
   $scope.myTeam = [];
 
+  $http.get('/profile/myTeam').
+    success(function(data, status, headers, config) {
+      $scope.myTeam = data;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
+
   $scope.showList = function() {
     $http.get('/players').
       success(function(data, status, headers, config) {

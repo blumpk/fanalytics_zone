@@ -3,6 +3,7 @@ var router = express.Router();
 var Teams = require('../models/teams');
 var Players = require('../models/players');
 var myTeam = require('../models/myTeam');
+var mongoose = require('mongoose');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -82,12 +83,24 @@ module.exports = function(passport) {
     });
 
     router.post('/profile/myTeam', function(req, res) {
+        console.log(req.body);
         myTeam.findOneAndUpdate(
             {user_id: req.user.id},
             {$push: {players : req.body._id}},
         {safe: true, upsert: true},
         function(err) {
             console.log(err);
+        });
+    });
+
+    router.get('/profile/myTeam', function(req, res) {
+        var players;
+        myTeam.find({}, function(err, data) {
+            players = data[0].players;
+            Players.find({"_id": { $in: players}
+            }, function(err, data) {
+                res.send(data);
+            });
         });
     });
 

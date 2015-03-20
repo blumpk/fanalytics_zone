@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var playersSchema = new Schema({
-    _id : String,
     first_name : String,
     last_name : Boolean,
     display_name : String,
