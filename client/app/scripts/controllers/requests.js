@@ -3,7 +3,14 @@
 app.controller('RequestsCtrl', function($scope, $http) {
 
 
-  $scope.myTeam = ["John Wall", "Kobe Bryant", "Anthony Davis", "LeBron James", "James Harden"];
+  $scope.myTeam = [];
+  $http.get('/profile/myTeam').
+    success(function(data, status, headers, config) {
+      $scope.myTeam = data;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
   $scope.myQuestion = [];
 
   $scope.addPlayer = function(player) {

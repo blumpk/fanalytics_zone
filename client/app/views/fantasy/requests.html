@@ -11,7 +11,7 @@
     <div class="col-lg-4">
       <h3> My Team </h3>
       <li ng-repeat="player in myTeam" class="list-group-item" ng-click="addPlayer(player)">
-        {{player}}
+        {{player.display_name}}
       </li>
     </div>
     <div class="col-lg-4">
@@ -19,7 +19,7 @@
       <button class="btn btn-circle" data-toggle="modal"
               data-target="#basicModal">Compare Players</button>
       <li ng-repeat="player in myQuestion" class="list-group-item" ng-click="subPlayer(player)">
-        {{player}}
+        {{player.display_name}}
       </li>
     </div>
   </div>
