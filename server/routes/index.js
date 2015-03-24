@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Teams = require('../models/teams');
-var Players = require('../models/players');
+//var Teams = require('../models/teams');
+//var Players = require('../models/players');
 var myTeam = require('../models/myTeam');
 var mongoose = require('mongoose');
+var nbaModel = require('../models/nbamodels');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -71,13 +72,13 @@ module.exports = function(passport) {
 
     router.get('/teams', function(req, res) {
         console.log(req.user.id);
-        Teams.find({}, function(err, data) {
+        nbaModel.teams.find({}, function(err, data) {
             res.send(data);
         });
     });
 
     router.get('/players', function(req, res) {
-        Players.find({}, function(err, data) {
+        nbaModel.players.find({}, function(err, data) {
             res.send(data);
         });
     });
@@ -95,12 +96,18 @@ module.exports = function(passport) {
 
     router.get('/profile/myTeam', function(req, res) {
         var players;
-        myTeam.find({}, function(err, data) {
+        myTeam.find({user_id: req.user.id}, function(err, data) {
             players = data[0].players;
-            Players.find({"_id": { $in: players}
+            nbaModel.players.find({"_id": { $in: players}
             }, function(err, data) {
                 res.send(data);
             });
+        });
+    });
+
+    router.get('/nba/teams', function(req, res) {
+        nbaModel.teams.find({}, function(err, data) {
+            res.send(data);
         });
     });
 
