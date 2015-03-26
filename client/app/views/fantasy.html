@@ -31,17 +31,17 @@
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">Please Select Players to Add to Team</div>
-          <li ng-repeat="player in teams | filter:searchText | limitTo:10" ng-show="showPlayer" class="list-group-item"
+          <li ng-repeat="player in teams | orderBy: 'PLAYER' | filter:searchText | limitTo:10" ng-show="showPlayer" class="list-group-item"
               ng-click="addPlayer(player)">
-            {{player.display_name}}
+            {{player.PLAYER}}
           </li>
-          <li ng-repeat="team in teams | filter:searchText | limitTo:10" ng-show="showTeam" class="list-group-item">
-            {{team.full_name}}
+          <li ng-repeat="team in teams | orderBy: 'teamName' | filter:searchText | limitTo:10" ng-show="showTeam" class="list-group-item">
+            {{team.teamName}}
           </li>
         </div>
       </div>
       <div class="col-lg-4">
-        <li ng-repeat="player in myTeam" class="list-group-item">{{player.display_name}}</li>
+        <li ng-repeat="player in myTeam" class="list-group-item">{{player.PLAYER}}</li>
         <button class="btn btn btn-primary" type="button" ng-click="saveTeam()">SAVE</button>
       </div>
     </div>
