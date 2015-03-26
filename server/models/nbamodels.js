@@ -87,7 +87,7 @@ var playerGameStats = new Schema({
     "FG_PCT": Number,
     "FG3_PCT": Number,
     "GAME_DATE": String
-})
+});
 
 var playercareerstats = new Schema(
     {
@@ -194,13 +194,14 @@ var nbaSchema = new Schema({
 });
  */
 
-var playerCareer = mongoose.model('playerCareer', playercareerstats);
-var teamSeason = mongoose.model('teamSeason', teamSeasonGameLog);
-var playerGame = mongoose.model('playerGame', playergamestats);
-var playerInfo = mongoose.model('playerInfo', playerinfo);
-var playersDB = mongoose.model('players', players);
-var teamInfo = mongoose.model('teamInfo', teaminfo);
-var teamsDB = mongoose.model('teams', teams);
+var playerCareer = mongoose.model('playerCareer', playercareerstats, 'nbaplayercareerstats');
+var teamSeason = mongoose.model('teamSeason', teamSeasonGameLog, 'nbateamgamestats');
+var playerGame = mongoose.model('playerGame', playergamestats, 'nbaplayergamestats');
+var playerInfo = mongoose.model('nbaplayerinfo', playerinfo, 'nbaplayerinfo');
+var playersDB = mongoose.model('nbaplayers', players, 'nbaplayers');
+var teamInfo = mongoose.model('nbateamInfo', teaminfo, 'nbateaminfo');
+var teamsDB = mongoose.model('nbateams', teams, 'nbateams');
+
 module.exports = {
     playerCareer: playerCareer,
     teamSeason: teamSeason,

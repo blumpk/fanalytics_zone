@@ -111,5 +111,36 @@ module.exports = function(passport) {
         });
     });
 
+    router.get('/nba/player/gamestats/:id', function(req,res) {
+        nbaModel.playerGame.find({"PLAYER_ID": req.param("id")}, function(err, data) {
+            res.send(data);
+        });
+    });
+
+    router.get('/nba/player/careerstats/:id', function(req, res) {
+        nbaModel.playerCareer.find({"PLAYER_ID": req.param("id")}, function(err, data) {
+            res.send(data);
+        });
+    });
+
+    router.get('/nba/player/:id', function(req,res) {
+        nbaModel.playerInfo.find({"PERSON_ID": req.param("id")}, function(err, data) {
+            res.send(data);
+        });
+    });
+
+    router.get('/nba/teams/season/:id', function(req, res) {
+        console.log(req.param("id"));
+        nbaModel.teamSeason.find({"Team_ID": req.param("id")}, function (err, data) {
+            res.send(data);
+        });
+    });
+
+    router.get('/nba/teams/:id', function(req, res) {
+        nbaModel.teamInfo.find({"TEAM_ID": req.param("id")}, function(err, data) {
+            res.send(data);
+        });
+    });
+
     return router;
 }
