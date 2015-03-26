@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4496bfc4-a8f8-4e66-8b9a-73d64b0c6587" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/views/fantasy.html" afterPath="$PROJECT_DIR$/client/app/views/fantasy.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/views/fantasy/requests.html" afterPath="$PROJECT_DIR$/client/app/views/fantasy/requests.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fantasy_app.iws" />
@@ -612,7 +610,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427349293506</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed Some Front-End Interfaces to Work with new Database">
+      <created>1427349812096</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1427349812096</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -677,7 +681,8 @@
     </option>
     <MESSAGE value="Updated Fantasy App Files" />
     <MESSAGE value="Added Routes for Accesing NBA MongoDB data&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Routes for Accesing NBA MongoDB data&#10;" />
+    <MESSAGE value="Fixed Some Front-End Interfaces to Work with new Database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Some Front-End Interfaces to Work with new Database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
