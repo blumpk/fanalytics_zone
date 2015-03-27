@@ -3,6 +3,7 @@ var router = express.Router();
 //var Teams = require('../models/teams');
 //var Players = require('../models/players');
 var myTeam = require('../models/myTeam');
+var myQuestion = require('../models/myQuestion');
 var mongoose = require('mongoose');
 var nbaModel = require('../models/nbamodels');
 
@@ -105,6 +106,22 @@ module.exports = function(passport) {
         });
     });
 
+    router.post('/profile/myQuestion', function(req, res) {
+        console.log(req.body);
+        var question = new myQuestion();
+            question.user_id = req.user.id;
+            question.players = req.body.players;
+            question.suggestions = [];
+            question.timeCreated = Date.now();
+            question.numberSelects = req.body.numSelect;
+
+        question.save(function(err) {
+            if (err)
+                throw err;
+            return
+        });
+    });
+
     router.get('/nba/teams', function(req, res) {
         nbaModel.teams.find({}, function(err, data) {
             res.send(data);
@@ -141,6 +158,8 @@ module.exports = function(passport) {
             res.send(data);
         });
     });
+
+
 
     return router;
 }

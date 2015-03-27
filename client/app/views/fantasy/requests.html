@@ -17,7 +17,7 @@
     <div class="col-lg-4">
       <h3 style="display:inline; margin:0px; padding:10px;">Fanatics Please Help Me Decide</h3>
       <button class="btn btn-circle" data-toggle="modal"
-              data-target="#basicModal">Compare Players</button>
+              data-target="#basicModal" ng-click="comparePlayers()">Compare Players</button>
       <li ng-repeat="player in myQuestion" class="list-group-item" ng-click="subPlayer(player)">
         {{player.PLAYER}}
       </li>
