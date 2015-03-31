@@ -12,6 +12,13 @@ app.controller('RequestsCtrl', function($scope, $http) {
       // log error
     });
   $scope.myQuestion = [];
+  $http.get('/profile/myQuestion').
+    success(function(data, status, headers, config) {
+      $scope.myQuestion = data;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
 
   $scope.addPlayer = function(player) {
     $scope.myQuestion.push(player);

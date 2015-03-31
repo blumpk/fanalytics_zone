@@ -122,6 +122,19 @@ module.exports = function(passport) {
         });
     });
 
+    router.get('/profile/myQuestion', function(req, res) {
+        myQuestion.find({user_id: req.user.id}, function(err, data) {
+            //console.log(data[0].players);
+            //res.send(data[0].players);
+            var players = data[0].players;
+            console.log(players);
+            nbaModel.players.find({"PLAYER_ID": { $in: players}
+            }, function(err, data) {
+                res.send(data);
+            });
+        });
+    });
+
     router.get('/nba/teams', function(req, res) {
         nbaModel.teams.find({}, function(err, data) {
             res.send(data);
