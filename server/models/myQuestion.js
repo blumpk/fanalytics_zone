@@ -6,7 +6,7 @@ var myQuestionSchema = new Schema({
     suggestions: [
         {
             user: String,
-            rec:[Number]
+            rec:[Schema.Types.Mixed]
         }
     ],
     timeCreated: Number,

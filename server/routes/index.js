@@ -6,6 +6,7 @@ var myTeam = require('../models/myTeam');
 var myQuestion = require('../models/myQuestion');
 var mongoose = require('mongoose');
 var nbaModel = require('../models/nbamodels');
+var article = require('../models/Articles');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -72,7 +73,6 @@ module.exports = function(passport) {
 
 
     router.get('/teams', function(req, res) {
-        console.log(req.user.id);
         nbaModel.teams.find({}, function(err, data) {
             res.send(data);
         });
@@ -85,7 +85,6 @@ module.exports = function(passport) {
     });
 
     router.post('/profile/myTeam', function(req, res) {
-        console.log(req.body);
         myTeam.findOneAndUpdate(
             {user_id: req.user.id},
             {$push: {players : req.body._id}},
@@ -107,7 +106,6 @@ module.exports = function(passport) {
     });
 
     router.post('/profile/myQuestion', function(req, res) {
-        console.log(req.body);
         var question = new myQuestion();
             question.user_id = req.user.id;
             question.players = req.body.players;
@@ -124,13 +122,25 @@ module.exports = function(passport) {
 
     router.get('/profile/myQuestion', function(req, res) {
         myQuestion.find({user_id: req.user.id}, function(err, data) {
-            //console.log(data[0].players);
-            //res.send(data[0].players);
+            if (!data.length) {
+                return
+            }
+            var question = data[0]._id;
             var players = data[0].players;
-            console.log(players);
             nbaModel.players.find({"PLAYER_ID": { $in: players}
             }, function(err, data) {
-                res.send(data);
+                res.send({"data": data, "question": question});
+            });
+        });
+    });
+
+    router.post('/profile/myAdvice', function(req, res) {
+        myQuestion.findById(req.body.question, function(err, data) {
+            data.suggestions.push({"user": req.user.id, "rec": req.body.player});
+            data.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
             });
         });
     });
@@ -160,7 +170,6 @@ module.exports = function(passport) {
     });
 
     router.get('/nba/teams/season/:id', function(req, res) {
-        console.log(req.param("id"));
         nbaModel.teamSeason.find({"Team_ID": req.param("id")}, function (err, data) {
             res.send(data);
         });
@@ -172,6 +181,37 @@ module.exports = function(passport) {
         });
     });
 
+    router.post('/profile/postArticle', function(req, res) {
+        art = new article();
+        art.user_id = req.user.id;
+        art.title = req.body.title;
+        art.comments = [];
+        art.timeCreated = Date.now();
+        art.text = req.body.text;
+
+        art.save(function(err) {
+            if (err)
+                throw err;
+            return;
+        });
+    });
+
+    router.get('/articles', function(req, res) {
+        posts = article.find({}).limit(20).exec( function(err, data) {
+            res.send(data);
+        });
+    });
+
+    router.post('/profile/postComment', function(req, res) {
+        article.findById(req.body.articleid, function(err, data) {
+            data.comments.push({"user": req.user.id, "comment": req.body.comment, "time": Date.now()});
+            data.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
+            });
+        });
+    });
 
 
     return router;

@@ -122,6 +122,7 @@ var app = angular
         templateUrl: 'views/articles.html',
         controller: 'ArticlesCtrl',
         resolve: { loggedin: checkLoggedin }
+
       })
       .otherwise({
         redirectTo: 'views/home.html'

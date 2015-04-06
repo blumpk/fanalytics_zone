@@ -14,7 +14,7 @@ app.controller('RequestsCtrl', function($scope, $http) {
   $scope.myQuestion = [];
   $http.get('/profile/myQuestion').
     success(function(data, status, headers, config) {
-      $scope.myQuestion = data;
+      $scope.myQuestion = data.data;
     }).
     error(function(data, status, headers, config) {
       // log error

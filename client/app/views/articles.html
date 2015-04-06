@@ -1,7 +1,39 @@
 <div>
+  <div class="container">
 
-  <h2>Welcome</h2>
-  <p>Welcome to the Articles Page</p>
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <h2>Articles</h2>
+        <label style="float: center"> Articles </label>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <button type="button" class="btn btn-success" ng-click="addArticle()">Add New Article</button>
+        <div ng-show="showAddArticle">
+        <div class="input-group" ng-show="showAddArticle">
+          <span class="input-group-addon" id="basic-addon1">TITLE</span>
+          <input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon1" ng-model="post.title">
+        </div>
+          <h2><span class="label label-info">Posting</span></h2>
+          <textarea class="form-control" rows="5" id="articlebody" ng-model="post.text"></textarea>
+          <button type="button" class="btn btn-success" ng-click="postArticle()">Post</button>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12"
+      <li ng-repeat="article in listArticles" class="list-group-item">
+        {{ article.title }} <br>
+        {{ article.text }} <br>
+        <input type="text" class="form-control" placeholder="Comment" aria-describedby="basic-addon1" ng-model="article.comment">
+        <button type="button" class="btn btn-default" ng-click="postComment(article)">Comment</button>
+        <li ng-repeat="com in article.comments" class="list-group-item">
+        {{ com.comment }}
+      </li>
+      </li>
+    </div>
+  </div>
 </div>
-
-
