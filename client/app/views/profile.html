@@ -1,12 +1,61 @@
 <div>
+  <div class="container">
+  <div class="jumbotron">
+    <h1>User Profile</h1>
+    <h3>Hi {{ firstName }}</h3>
+    </div>
+  <h2>
+    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#usernameChange" aria-expanded="false" aria-controls="usernameChange">
+      Username:
+    </button>
+    {{ username }}
+    <br>
+  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#firstNameChange" aria-expanded="false" aria-controls="firstNameChange">
+      First Name:
+    </button>
+  {{ firstName }}
+  <div class="collapse" id="firstNameChange">
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">First Name</span>
+        <input type="text" class="form-control" placeholder="First">
+      <span class="input-group-btn">
+        </span>
+      <button type="submit" class="btn btn-default" ng-click="changeFirstName">Change</button>
+      </div>
 
-  <h2>Welcome</h2>
-  <p>Welcome to the Profile Page</p>
- <p> {{ firstName }}
-  {{ lastName }}
-   {{ email }}
-  {{ username }}
-  </p>
+    </form>
+    </div>
+     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#lastNameChange" aria-expanded="false" aria-controls="lastNameChange">
+     Last Name:
+       </button>
+     {{ lastName }}
+     <div class="collapse" id="lastNameChange">
+         <div class="input-group input-append">
+           <span class="input-group-addon" id="basic-addon2">Last Name</span>
+           <input type="text" class="form-control" placeholder="Last">
+           <span class="input-group-btn">
+           <button type="submit" class="btn btn-default" ng-click="changeLastName">Change</button>
+             </span>
+         </div>
+
+       </div>
+  <br>
+     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#emailChange" aria-expanded="false" aria-controls="emailChange">
+     Email:
+       </button>
+  {{ email }}
+     <div class="collapse" id="emailChange">
+       <div class="input-group">
+           <span class="input-group-addon" id="basic-addon3">Email</span>
+           <input type="text" class="form-control" placeholder="Email">
+         <span class="input-group-btn">
+         <button type="submit" class="btn btn-default" ng-click="changeEmail">Change</button>
+           </span>
+         </div>
+       </div>
+  <br>
+  </h2>
+</div>
 </div>
 
 
