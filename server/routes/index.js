@@ -7,6 +7,7 @@ var myQuestion = require('../models/myQuestion');
 var mongoose = require('mongoose');
 var nbaModel = require('../models/nbamodels');
 var article = require('../models/Articles');
+var userProfile = require('../models/UserProfile');
 
 var isAuthenticated = function (req, res, next) {
     // if user is authenticated in the session, call the next() to call the next request handler
@@ -58,12 +59,28 @@ module.exports = function(passport) {
     /* Handle Login POST */
     /* Handle Registration POST */
 
+    function postUser(req, res, next) {
+        var user = new userProfile();
+        user.user_id = req.user.id;
+        user.username = req.body.username;
+        user.email = req.body.email;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.timeCreated = Date.now();
+        user.save(function(err) {
+            if (err)
+                throw err;
+            return
+        });
+        //the response is available here
+        res.redirect('/home');
+    }
 
-    router.post('/register', passport.authenticate('register', {
-        successRedirect: '/home',
+    router.post('/register', [passport.authenticate('register', {
+        //successRedirect: '/home',
         failureRedirect: '/register',
         failureFlash : true
-    }));
+    }), postUser]);
 
     /* Handle Logout */
     router.get('/logout', function(req, res) {
@@ -97,11 +114,17 @@ module.exports = function(passport) {
     router.get('/profile/myTeam', function(req, res) {
         var players;
         myTeam.find({user_id: req.user.id}, function(err, data) {
-            players = data[0].players;
-            nbaModel.players.find({"_id": { $in: players}
-            }, function(err, data) {
-                res.send(data);
-            });
+            if (!data.length) {
+                return
+            }
+            else {
+                players = data[0].players;
+                nbaModel.players.find({
+                    "_id": {$in: players}
+                }, function (err, data) {
+                    res.send(data);
+                });
+            }
         });
     });
 
@@ -210,6 +233,13 @@ module.exports = function(passport) {
                     console.error('ERROR!');
                 }
             });
+        });
+    });
+
+    router.get('/profile/myProfile', function(req, res) {
+        console.log(req.user.id);
+        userProfile.find({'user_id': req.user.id}, function(err, data) {
+            res.send(data);
         });
     });
 

@@ -7,6 +7,8 @@
 
   <form ng-submit="register()">
     <p ng-show="error" class="text-danger">{{ error }}</p>
+    <input type="text" ng-model="user.firstName" placeholder="First Name" class="form-control" name="firstName"><br>
+    <input type="text" ng-model="user.lastName" placeholder="Last Name" class="form-control" name="lastName"><br>
     <input type="text" ng-model="user.username" placeholder="Username" class="form-control" name="username"><br>
     <input type="email" ng-model="user.email" placeholder="Email" class="form-control" name="email"><br>
     <input type="password" ng-model="user.password" placeholder="Password" class="form-control" name="password"><br>

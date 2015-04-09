@@ -1,30 +1,18 @@
 'use strict';
 
-app.controller('ProfileCtrl', function($scope, $location) {
-/*
-    if (Auth.signedIn()) {
-        $location.path('/');
-    }
-    $scope.error = "";
-    $scope.login = function() {
-        Auth.login($scope.user).then(function () {
-            $location.path('/');
-        }, function(error) {
-            $scope.error = error.toString();
-        });
-    };
+app.controller('ProfileCtrl', function($scope, $http) {
+$scope.profile = {}
+  $http.get('/profile/myProfile').
+    success(function(data, status, headers, config) {
+      $scope.profile = data[0];
+      console.log(data[0]);
+      $scope.firstName = data[0].firstName;
+      $scope.lastName = data[0].lastName;
+      $scope.username = data[0].username;
+      $scope.email = data[0].email;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
 
-    $scope.register = function () {
-        Auth.register($scope.user).then(function(user) {
-            return Auth.login($scope.user).then(function() {
-                user.username = $scope.user.username;
-                return Auth.createProfile(user);
-            }).then(function() {
-                $location.path('/');
-            });
-        }, function(error) {
-            $scope.error = error.toString();
-        });
-    };
-    */
 });
